@@ -1,0 +1,219 @@
+:root {
+  --verde: #1f8a4c;
+  --verde-escuro: #146b39;
+  --azul: #1a56db;
+  --fundo: #f4f6f5;
+  --cartao: #ffffff;
+  --texto: #1f2937;
+  --texto-suave: #6b7280;
+  --borda: #e5e7eb;
+  --sombra: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+header.topo {
+  background: var(--verde);
+  color: white;
+  padding: 18px 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--sombra);
+}
+
+header.topo h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+header.topo p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  padding-bottom: 60px;
+}
+
+.mapa-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--sombra);
+  background: white;
+  touch-action: manipulation;
+}
+
+.mapa-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 7.5%;
+  aspect-ratio: 1;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.001);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.hotspot:active {
+  background: rgba(31,138,76,0.35);
+}
+
+.hotspot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.hotspot:hover::after {
+  border-color: var(--verde);
+}
+
+.secao-titulo {
+  margin: 28px 0 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.grade-territorios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 10px;
+}
+
+.botao-territorio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cartao);
+  border: 2px solid var(--borda);
+  border-radius: 10px;
+  padding: 14px 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--verde-escuro);
+  text-decoration: none;
+  box-shadow: var(--sombra);
+  transition: transform 0.1s ease;
+}
+
+.botao-territorio:active {
+  transform: scale(0.95);
+  background: #eafaf0;
+}
+
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.bloco-card {
+  background: var(--cartao);
+  border-radius: 14px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.bloco-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid var(--borda);
+}
+
+.bloco-card .conteudo {
+  padding: 14px 16px 18px;
+}
+
+.bloco-card h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: var(--texto);
+}
+
+.lista-ruas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link-maps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #eafaf0;
+  border: 1px solid #bfe8cf;
+  color: var(--verde-escuro);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.link-maps:active {
+  background: #d6f3e1;
+}
+
+.link-maps .pin {
+  font-size: 1.1rem;
+}
+
+.aviso {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  color: #7a5b00;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.titulo-territorio {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--verde-escuro);
+  margin: 10px 0 4px;
+}
+
+footer {
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.78rem;
+  padding: 20px 16px 40px;
+}

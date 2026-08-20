@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Território — detalhes</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo">
+  <a class="voltar" href="index.html">← Voltar ao mapa</a>
+  <h1 id="tituloTopo">Território</h1>
+</header>
+
+<main id="conteudo">
+  <!-- preenchido via JS -->
+</main>
+
+<footer>Feito para uso do território — edite os links em data.js</footer>
+
+<script src="data.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const conteudo = document.getElementById('conteudo');
+  const tituloTopo = document.getElementById('tituloTopo');
+
+  const territorio = DADOS.territorios[id];
+
+  if (!territorio) {
+    tituloTopo.textContent = 'Território não encontrado';
+    conteudo.innerHTML = '<p>Volte ao mapa e escolha um território válido.</p>';
+  } else {
+    tituloTopo.textContent = territorio.nome;
+    document.title = territorio.nome;
+
+    let html = `<div class="titulo-territorio">${territorio.nome}</div>`;
+
+    html += `<div class="bloco-card">
+      <img src="${territorio.imagem}" alt="${territorio.nome}" loading="lazy">
+    </div>`;
+
+    if (!territorio.blocos || territorio.blocos.length === 0) {
+      html += `<div class="aviso">Nenhum bloco cadastrado para este território ainda.</div>`;
+    } else {
+      territorio.blocos.forEach(bloco => {
+        const rotulo = bloco.letra ? `Bloco ${id}${bloco.letra}` : `Território ${id}`;
+        html += `<div class="secao-titulo">${rotulo}</div>
+          <div class="lista-ruas" style="margin-bottom:20px;">`;
+        if (!bloco.ruas || bloco.ruas.length === 0) {
+          html += `<div class="aviso">Nenhuma rua cadastrada para este bloco.</div>`;
+        } else {
+          bloco.ruas.forEach(rua => {
+            html += `<a class="link-maps" href="${rua.maps}" target="_blank" rel="noopener">
+              <span class="pin">📍</span> ${rua.nome}
+            </a>`;
+          });
+        }
+        html += `</div>`;
+      });
+    }
+
+    conteudo.innerHTML = html;
+  }
+</script>
+
+</body>
+</html>

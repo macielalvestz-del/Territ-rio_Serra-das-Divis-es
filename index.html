@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Território Serra das Divisões — Mapa</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo">
+  <h1>🗺️ Território Serra das Divisões</h1>
+  <p>Toque em um número do mapa ou na lista abaixo</p>
+</header>
+
+<main>
+  <div class="mapa-wrap" id="mapaWrap">
+    <img src="images/mapa-completo.jpg" alt="Mapa completo do território" id="mapaImg">
+    <!-- hotspots inseridos via JS -->
+  </div>
+
+  <div class="secao-titulo">Todos os territórios</div>
+  <div class="grade-territorios" id="grade"></div>
+</main>
+
+<footer>Feito para uso do território — edite os links em data.js</footer>
+
+<script src="data.js"></script>
+<script>
+  const wrap = document.getElementById('mapaWrap');
+  const grade = document.getElementById('grade');
+
+  const numeros = Object.keys(DADOS.territorios).sort();
+
+  // hotspots sobre o mapa
+  numeros.forEach(num => {
+    const pos = DADOS.hotspots[num];
+    if (!pos) return;
+    const a = document.createElement('a');
+    a.href = `territorio.html?id=${num}`;
+    a.className = 'hotspot';
+    a.style.left = (pos.x * 100) + '%';
+    a.style.top = (pos.y * 100) + '%';
+    a.setAttribute('aria-label', 'Território ' + num);
+    wrap.appendChild(a);
+  });
+
+  // lista/grade abaixo do mapa
+  numeros.forEach(num => {
+    const btn = document.createElement('a');
+    btn.href = `territorio.html?id=${num}`;
+    btn.className = 'botao-territorio';
+    btn.textContent = num;
+    grade.appendChild(btn);
+  });
+</script>
+
+</body>
+</html>
